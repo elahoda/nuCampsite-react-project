@@ -5,7 +5,7 @@ import { baseUrl } from "../../app/shared/baseUrl";
 import { mapImageURL } from "../../utils/manageImageURL";
 
 export const fetchPromotions = createAsyncThunk(
-  "promotions/f = etchPromotions",
+  "promotions/fetchPromotions",
   async () => {
     const response = await fetch(baseUrl + "promotions");
     if (!response.ok) {
@@ -25,12 +25,12 @@ const initialState = {
 const promotionsSlice = createSlice({
   name: "promotions",
   initialState,
-  reducers: [],
+  reducers: {},
   extraReducers: {
     [fetchPromotions.pending]: (state) => {
       state.isLoading = true;
     },
-    [fetchPromotions.fulfulled]: (state, action) => {
+    [fetchPromotions.fulfilled]: (state, action) => {
       state.isLoading = false;
       state.errMsg = "";
       state.promotionsArray = mapImageURL(action.payload);
@@ -43,9 +43,12 @@ const promotionsSlice = createSlice({
 });
 
 export const promotionsReducer = promotionsSlice.reducer;
-
-export const selectFeaturedPromotions = (state) => {
-  return state.promotions.promotionsArray.find(
-    (promotion) => promotion.featured
-  );
+export const selectFeaturedPromotion = (state) => {
+  return {
+    featuredItem: state.promotions.promotionsArray.find(
+      (promotion) => promotion.featured
+    ),
+    isLoading: state.promotions.isLoading,
+    errMsg: state.promotions.errMsg,
+  };
 };

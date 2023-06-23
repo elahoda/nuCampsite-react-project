@@ -5,6 +5,8 @@ import { Col, Row } from "reactstrap";
 import Partner from "./Partner";
 import { selectAllPartners } from "./partnersSlice";
 
+import { selectFeaturedPartner } from "./partnersSlice";
+
 const PartnersList = () => {
   const partners = useSelector(selectAllPartners);
 
