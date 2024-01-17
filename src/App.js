@@ -11,6 +11,7 @@ import CampsiteDetailPage from "./pages/CampsiteDetailPage";
 import AboutPage from "./pages/AboutPage";
 import { fetchCampsites } from "./features/campsites/campsitesSlice";
 import CampsitesDirectoryPage from "./pages/CampsitesDirectoryPage";
+import { fetchComments } from "./features/comments/commentsSlice";
 
 import React from "react";
 
@@ -23,6 +24,7 @@ function App() {
     dispatch(fetchCampsites());
     dispatch(fetchPartners());
     dispatch(fetchPromotions());
+    dispatch(fetchComments());
   }, [dispatch]);
 
   return (
